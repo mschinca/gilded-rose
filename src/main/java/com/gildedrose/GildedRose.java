@@ -2,75 +2,22 @@ package com.gildedrose;
 
 public class GildedRose {
 
-    private String name;
-    private Long quality;
-    private Long daysRemaining;
-
-    public String getName() {
-        return name;
-    }
+    private Item item;
 
     public Long getQuality() {
-        return quality;
+    		return item.getQuality();
     }
 
     public Long getDaysRemaining() {
-        return daysRemaining;
+			return item.getDaysRemaining();
     }
 
 
 	public GildedRose(String name, Long quality, Long daysRemaining) {
-		this.name = name;
-		this.quality = quality;
-		this.daysRemaining = daysRemaining;
+		this.item = ItemFactory.create(name, quality, daysRemaining);
 	}
 
 	public void tick() {
-		if (!getName().equals("Aged Brie") && !getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
-			if (getQuality() > 0) {
-				if (!getName().equals("Sulfuras, Hand of Ragnaros")) {
-					quality -= 1;
-				}
-			}
-		}
-		else {
-			if (getQuality() < 50) {
-				quality += 1;
-				if (getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
-					if (getDaysRemaining() < 11) {
-						if (getQuality() < 50) {
-							quality += 1;
-						}
-					}
-					if (getDaysRemaining() < 6) {
-						if (getQuality() < 50) {
-							quality += 1;
-						}
-					}
-				}
-			}
-		}
-		if (!getName().equals("Sulfuras, Hand of Ragnaros")) {
-			daysRemaining -= 1;
-		}
-		if (getDaysRemaining() < 0) {
-			if (!getName().equals("Aged Brie")) {
-				if (!getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
-					if (getQuality() > 0) {
-						if (!getName().equals("Sulfuras, Hand of Ragnaros")) {
-							quality -= 1;
-						}
-					}
-				}
-				else {
-					quality = quality - quality;
-				}
-			}
-			else {
-				if (getQuality() < 50) {
-					quality += 1;
-				}
-			}
-		}
+    	item.tick();
 	}
 }
